@@ -1,25 +1,26 @@
 
 
 ![License](https://img.shields.io/badge/license-MIT-green?logo=github)
-![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/gravitymir/ytsubtitles/master?logo=go)
 ![Lines of code](https://img.shields.io/tokei/lines/github/gravitymir/ytsubtitles?logo=github)
 ![Github Repository Size](https://img.shields.io/github/repo-size/gravitymir/ytsubtitles?logo=github)
 [![Github forks](https://img.shields.io/github/forks/gravitymir/ytsubtitles?logo=github)](https://github.com/gravitymir/ytsubtitles/network/members)
-![GitHub contributors](https://img.shields.io/github/contributors/gravitymir/ytsubtitles?logo=github)
-![GitHub last commit](https://img.shields.io/github/last-commit/gravitymir/ytsubtitles)
+![Repository Top Language](https://img.shields.io/github/languages/top/gravitymir/ytsubtitles)
 
+![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/gravitymir/ytsubtitles/master?logo=go)
+![Go Report](https://goreportcard.com/badge/github.com/gravitymir/ytsubtitles?logo=go)
+![GitHub contributors](https://img.shields.io/github/contributors/gravitymir/ytsubtitles?logo=github)
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/gravitymir/ytsubtitles)
-
-<!---
-![GitHub branch](https://img.shields.io/github/go-mod/go-version/gravitymir/ytsubtitles/master)
-![Go Report](https://goreportcard.com/badge/github.com/gravitymir/ytsubtitles?logo=go)
-![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/quality/g/gravitymir/ytsubtitles/master)
- ![Repository Top Language](https://img.shields.io/github/languages/top/gravitymir/ytsubtitles)
--->
+![GitHub last commit](https://img.shields.io/github/last-commit/gravitymir/ytsubtitles)
+[![GitHub open issues](https://img.shields.io/github/issues/gravitymir/ytsubtitles?logo=github)](https://github.com/gravitymir/ytsubtitles/issues)
+[![GitHub closed issues](https://img.shields.io/github/issues-closed/gravitymir/ytsubtitles?logo=github)](https://github.com/gravitymir/ytsubtitles/issues)
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/gravitymir/ytsubtitles?label=ytsubtitles&logo=github&color=505050&logoColor=fff)](https://github.com/gravitymir/ytsubtitles)
 [![GitHub User's stars](https://img.shields.io/github/stars/gravitymir?label=gravitymir&logo=github&color=505050&logoColor=fff)](https://github.com/gravitymir)
+
+
+
+
 
 # ytsubtitles
 #### Module which help you scrap subtitles (captions) from YouTube
