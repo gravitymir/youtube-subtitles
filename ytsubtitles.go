@@ -23,20 +23,20 @@ type Track struct {
 }
 
 type YTS struct {
-	VideoID      string
-	Language     string
-	Tracks       map[string]Track
-	subtitlesXML struct {
+	VideoID   string
+	Language  string
+	Tracks    map[string]Track
+	Subtitles struct {
 		Text []struct {
 			Text  string `xml:",chardata"`
 			Start string `xml:"start,attr"`
 			Dur   string `xml:"dur,attr"`
 		} `xml:"text"`
 	}
+	data []byte
 }
 
-// GetLanguage choice language os available
-func (yts *YTS) GetLanguage(lang string) error {
+func (yts *YTS) getLanguage(lang string) error {
 	if lang == "" {
 		for _, v := range yts.Tracks {
 			lang = v.Name.SimpleText //random
@@ -61,41 +61,47 @@ func (yts *YTS) GetLanguage(lang string) error {
 	if err != nil {
 		return err
 	}
-	err = xml.Unmarshal(bodyByte, &yts.subtitlesXML)
+	err = xml.Unmarshal(bodyByte, &yts.Subtitles)
 	return err
 }
 
-// GetPlainText get subtitles into only plain text, without timestamps
-func (yts *YTS) GetPlainText() (text string, err error) {
-	if len(yts.subtitlesXML.Text) == 0 {
-		return text, errors.New(fmt.Sprintf("subtitles of %s %s is emptty", yts.VideoID, yts.Language))
+// PlainText get subtitles into only plain text, without timestamps
+func (yts *YTS) PlainText(lang string) (text string, err error) {
+	if err = yts.getLanguage(lang); err != nil {
+		return text, err
 	}
-	for _, v := range yts.subtitlesXML.Text {
+	for _, v := range yts.Subtitles.Text {
 		text += fmt.Sprintf("%s\n", v.Text)
 	}
 	return strings.TrimRight(text, "\n"), err
 }
 
-// GetJson subtitles in string JSON
-func (yts *YTS) GetJson() (res []byte, err error) {
-	if res, err := json.Marshal(yts.subtitlesXML); err != nil {
+// Json subtitles in string JSON
+func (yts *YTS) Json(lang string) (sbt []byte, err error) {
+	if err = yts.getLanguage(lang); err != nil {
+		return sbt, err
+	}
+	if res, err := json.Marshal(yts.Subtitles); err != nil {
 		return res, err
 	}
-	return res, err
+	return sbt, err
 }
 
-// GetJsonPretty return subtitles in string JSON with 4 spaces for better humans reading
+// JsonPretty return subtitles in string JSON with 4 spaces for better humans reading
 // pretty style JSON print
-func (yts *YTS) GetJsonPretty() (res []byte, err error) {
-	res, err = json.MarshalIndent(yts.subtitlesXML.Text, "", "    ")
-	if err != nil {
-		return res, err
+func (yts *YTS) JsonPretty(lang string) (sbt []byte, err error) {
+	if err = yts.getLanguage(lang); err != nil {
+		return sbt, err
 	}
-	return res, err
+	sbt, err = json.MarshalIndent(yts.Subtitles.Text, "", "    ")
+	if err != nil {
+		return sbt, err
+	}
+	return sbt, err
 }
 
-// Init check on YouTube all available subtitles and languages
-func Init(ID string) (yts *YTS, err error) {
+// Get check on YouTube all available subtitles and languages
+func Get(ID string) (yts *YTS, err error) {
 	yts = new(YTS)
 	regular, err := regexp.Compile(`([a-zA-Z0-9-_]{11})`)
 	if err != nil {
@@ -106,9 +112,8 @@ func Init(ID string) (yts *YTS, err error) {
 	}
 	yts.VideoID = string(regular.Find([]byte(ID)))
 
-	data, err := requestYT(yts.VideoID)
-
-	if err != nil {
+	//yts.data add
+	if err = yts.requestYT(yts.VideoID); err != nil {
 		return yts, err
 	}
 
@@ -116,12 +121,12 @@ func Init(ID string) (yts *YTS, err error) {
 	if err != nil {
 		return yts, err
 	}
-	if regular.Match(data) != true {
+	if regular.Match(yts.data) != true {
 		return yts, errors.New(fmt.Sprintf("captions not found on video: \"%s\"", yts.VideoID))
 	}
 
-	jsonByteArray := append([]byte{123}, regular.Find(data)...) //add {
-	jsonByteArray = append(jsonByteArray, 125)                  //add }
+	yts.data = append([]byte{123}, regular.Find(yts.data)...) //add {
+	yts.data = append(yts.data, 125)                          //add }
 
 	aux := struct {
 		CaptionTracks []struct {
@@ -136,17 +141,17 @@ func Init(ID string) (yts *YTS, err error) {
 		} `json:"captionTracks"`
 	}{}
 
-	if err = json.Unmarshal(jsonByteArray, &aux); err != nil {
+	if err = json.Unmarshal(yts.data, &aux); err != nil {
 		return yts, err
 	}
-
+	yts.data = nil
 	yts.Tracks = make(map[string]Track)
 	for _, v := range aux.CaptionTracks {
 		yts.Tracks[v.Name.SimpleText] = v
 	}
 	return yts, err
 }
-func requestYT(ID string) ([]byte, error) {
+func (yts *YTS) requestYT(ID string) error {
 	res, err := http.Get(fmt.Sprintf("https://youtube.com/watch?v=%s", ID))
 	defer func(Body io.ReadCloser) {
 		err := Body.Close()
@@ -156,16 +161,14 @@ func requestYT(ID string) ([]byte, error) {
 	}(res.Body)
 
 	if err != nil {
-		return nil, err
+		return err
 	}
 	if res.StatusCode != http.StatusOK {
 		errStr := fmt.Sprintf("http StatusCode is %d", res.StatusCode)
-		return nil, errors.New(errStr)
+		return errors.New(errStr)
 	}
-	data, err := io.ReadAll(res.Body)
-
-	if err != nil {
-		return data, err
+	if yts.data, err = io.ReadAll(res.Body); err != nil {
+		return err
 	}
-	return data, err
+	return err
 }
