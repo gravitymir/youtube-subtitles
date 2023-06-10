@@ -42,23 +42,27 @@ import (
 )
 
 func main() {
-    if mySbt, err := yts.Get("CLkkj3aka4g"); err != nil {
-        fmt.Println(err)
-    } else {
-
-    fmt.Printf("%+v", mySbt.Tracks)
-
-    //if sbtText, err := mySbt.PlainText("Russian"); err == nil{
-    //	fmt.Printf("%+v", mySbt.Subtitles)
-    //	fmt.Println(string(sbtText))
-    //}
-    //if sbtJSON, err := mySbt.Json("Russian"); err == nil{
-    //	fmt.Println(string(sbtJSON))
-    //}
-    //if sbtJSONPretty, err := mySbt.JsonPretty("Russian"); err == nil{
-    //	fmt.Println(string(sbtJSONPretty))
-    //}
-    }
+	//you can use types of videoID
+	// 1 https://www.youtube.com/watch?v=videoID
+	// 2 www.youtube.com/watch?v=videoID
+	// 3 youtube.com/watch?v=videoID
+	// 4 https://www.youtube.com/watch?v=videoID&t=215s
+	// 5 https://youtu.be/videoID?t=215
+	// 6 videoID
+	// any string with videoID
+	if mySbt, err := yts.Get("https://youtu.be/CLkkj3aka4g?t=215"); err != nil {
+		fmt.Println(err)
+	} else {
+		if sbtText, err := mySbt.PlainText("Russian"); err == nil {
+			fmt.Printf("%+v", mySbt.Subtitles)
+			fmt.Println(string(sbtText))
+		}
+		if sbtJSON, err := mySbt.Json("Russian"); err == nil {
+			fmt.Println(string(sbtJSON))
+		}
+		if sbtJSONPretty, err := mySbt.JsonPretty("Russian"); err == nil {
+			fmt.Println(string(sbtJSONPretty))
+		}
+		fmt.Printf("%+v", mySbt.Tracks)
+	}
 }
-
-```

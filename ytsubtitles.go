@@ -102,6 +102,14 @@ func (yts *YTS) JsonPretty(lang string) (sbt []byte, err error) {
 }
 
 // Get check on YouTube all available subtitles and languages
+// you can use types of videoID
+// 1 https://www.youtube.com/watch?v=videoID
+// 2 www.youtube.com/watch?v=videoID
+// 3 youtube.com/watch?v=videoID
+// 4 https://www.youtube.com/watch?v=videoID&t=215s
+// 5 https://youtu.be/videoID?t=215
+// 6 videoID
+// any string with videoID
 func Get(ID string) (yts *YTS, err error) {
 	yts = new(YTS)
 	regular, err := regexp.Compile(`([a-zA-Z0-9-_]{11})`)
