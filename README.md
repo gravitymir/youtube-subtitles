@@ -4,13 +4,13 @@
 ![Lines of code](https://img.shields.io/tokei/lines/github/gravitymir/ytsubtitles?logo=github)
 ![Github Repository Size](https://img.shields.io/github/repo-size/gravitymir/ytsubtitles?logo=github)
 [![Github forks](https://img.shields.io/github/forks/gravitymir/ytsubtitles?logo=github)](https://github.com/gravitymir/ytsubtitles/network/members)
-![Repository Top Language](https://img.shields.io/github/languages/top/gravitymir/ytsubtitles)
+![Repository Top Language](https://img.shields.io/github/languages/top/gravitymir/ytsubtitles?logo=github)
 
-![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/gravitymir/ytsubtitles/master?logo=go)
-![Go Report](https://goreportcard.com/badge/github.com/gravitymir/ytsubtitles?logo=go)
+![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/gravitymir/ytsubtitles/master?logo=go&logoColor=4DD6FD)
+![Go Report](https://goreportcard.com/badge/github.com/gravitymir/ytsubtitles)
 ![GitHub contributors](https://img.shields.io/github/contributors/gravitymir/ytsubtitles?logo=github)
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/gravitymir/ytsubtitles)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/gravitymir/ytsubtitles?logo=go&logoColor=4DD6FD)
 ![GitHub last commit](https://img.shields.io/github/last-commit/gravitymir/ytsubtitles)
 [![GitHub open issues](https://img.shields.io/github/issues/gravitymir/ytsubtitles?logo=github)](https://github.com/gravitymir/ytsubtitles/issues)
 [![GitHub closed issues](https://img.shields.io/github/issues-closed/gravitymir/ytsubtitles?logo=github)](https://github.com/gravitymir/ytsubtitles/issues)
