@@ -22,6 +22,7 @@ type Track struct {
 	IsTranslatable bool   `json:"isTranslatable"`
 }
 
+// YTS Subtitles is slice of available subtitles
 type YTS struct {
 	VideoID   string
 	Language  string

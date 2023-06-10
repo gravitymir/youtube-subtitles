@@ -11,7 +11,7 @@
 ![GitHub contributors](https://img.shields.io/github/contributors/gravitymir/ytsubtitles?logo=github)
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/gravitymir/ytsubtitles?logo=go&logoColor=4DD6FD)
-![GitHub last commit](https://img.shields.io/github/last-commit/gravitymir/ytsubtitles)
+![GitHub last commit](https://img.shields.io/github/last-commit/gravitymir/ytsubtitles?logo=github)
 [![GitHub open issues](https://img.shields.io/github/issues/gravitymir/ytsubtitles?logo=github)](https://github.com/gravitymir/ytsubtitles/issues)
 [![GitHub closed issues](https://img.shields.io/github/issues-closed/gravitymir/ytsubtitles?logo=github)](https://github.com/gravitymir/ytsubtitles/issues)
 
