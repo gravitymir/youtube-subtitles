@@ -42,7 +42,7 @@ import (
 )
 
 func main() {
-	//you can use types of videoID
+	// you can use types of videoID
 	// 1 https://www.youtube.com/watch?v=videoID
 	// 2 www.youtube.com/watch?v=videoID
 	// 3 youtube.com/watch?v=videoID
