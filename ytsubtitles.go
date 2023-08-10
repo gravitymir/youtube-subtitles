@@ -82,7 +82,7 @@ func (yts *YTS) Json(lang string) (sbt []byte, err error) {
 	if err = yts.getLanguage(lang); err != nil {
 		return sbt, err
 	}
-	if res, err := json.Marshal(yts.Subtitles); err != nil {
+	if res, err := json.Marshal(yts.Subtitles.Text); err != nil {
 		return res, err
 	}
 	return sbt, err
